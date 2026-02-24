@@ -4,14 +4,14 @@ FROM node:20 AS frontend-build
 WORKDIR /app/frontend
 
 COPY frontend/package*.json ./
-RUN npm install
+RUN npm install --omit=dev
 
 COPY frontend .
 RUN npm run build
 
 
 # ---------- STEP 2: backend ----------
-FROM python:3.12
+FROM python:3.12-slim
 
 WORKDIR /app
 
