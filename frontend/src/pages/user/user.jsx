@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Upload, Target, Briefcase, MessageSquare, CheckCircle, AlertCircle, Info, TrendingUp, FileText, User, Mail, Phone, Code, LogOut } from 'lucide-react';
 
-const API_BASE = 'https://resume-analyzer-8rhy.onrender.com';
+const API_BASE = '';
 
 export default function UserDashboard() {
   const [activeTab, setActiveTab] = useState('analysis');
@@ -165,7 +165,7 @@ export default function UserDashboard() {
 
 const handleLogout = async () => {
   try {
-    const res = await fetch("https://resume-analyzer-8rhy.onrender.com/auth/logout", {
+    const res = await fetch("/auth/logout", {
       method: "POST",
       credentials: "include",
     });

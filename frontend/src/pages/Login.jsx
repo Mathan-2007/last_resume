@@ -14,7 +14,7 @@ export default function Login() {
   try {
     // ✅ LOGIN REQUEST
     const res = await fetch(
-      "https://resume-analyzer-8rhy.onrender.com/auth/login",
+      "/auth/login",
       {
         method: "POST",
         headers: {
@@ -36,7 +36,7 @@ export default function Login() {
 
     // ✅ VERIFY TOKEN (COOKIE SENT AUTOMATICALLY)
     const verify = await fetch(
-      "https://resume-analyzer-8rhy.onrender.com/auth/verify_token",
+      "/auth/verify_token",
       {
         method: "GET",
         credentials: "include",  // 🔥 VERY IMPORTANT
