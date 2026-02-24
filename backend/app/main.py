@@ -1,49 +1,32 @@
 # app/main.py
-# Main entry point for the AI Resume + Platform Analyzer backend
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-import os
+from fastapi.responses import FileResponse
 import uvicorn
 
-# Import routers
+# Routers
 from app.routes.resume_routes import router as resume_router
 from app.routes.leetcode_routes import router as leetcode_router
 from app.routes.codechef_routes import router as codechef_router
 from app.routes.github_routes import router as github_router
 from app.routes.analyze_all import router as analyze_all_router
 from app.routes.admin_resume_filter import router as admin_filter_router
-from app.routes.auth_routes import router as auth_router   # ✅ contains logout()
+from app.routes.auth_routes import router as auth_router
 from app.routes.user import router as user_router
 from app.routes.ai_routes import router as ai_router
 
-# -------------------------
-# FastAPI App Initialization
-# -------------------------
 app = FastAPI(title="AI Resume + Platform Analyzer")
 
-# -------------------------
-# ✅ CORS Setup (allow cookies from frontend)
-# -------------------------
-origins = [
-    "https://localhost:3000",
-    "https://mano-fq0yn1ovu-mathan-2007s-projects.vercel.app/"
-]
+# ✅ SIMPLE CORS (same-origin now)
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"^https://.*\.vercel\.app$",
-    allow_origins=["https://localhost:3000"],
+    allow_origins=["*"],  # you can tighten later
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# -------------------------
-# Root Route
-# -------------------------
-@app.get("/")
-def root():
-    return {"message": "AI Resume + Platform Analyzer running ✅"}
 
 # -------------------------
 # Routers
@@ -54,26 +37,22 @@ app.include_router(codechef_router, prefix="/codechef", tags=["CodeChef"])
 app.include_router(github_router, prefix="/github", tags=["GitHub"])
 app.include_router(analyze_all_router, tags=["Analyze All"])
 app.include_router(admin_filter_router, prefix="/admin", tags=["Admin Filter"])
-app.include_router(auth_router, prefix="/auth", tags=["Authentication"])  # ✅ includes /logout
+app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
 app.include_router(user_router, tags=["User"])
 app.include_router(ai_router, tags=["AI"])
 
 # -------------------------
-# Run Server
+# Static React Build
 # -------------------------
-if __name__ == "__main__":
-    uvicorn.run(
-        "app.main:app",
-        host="127.0.0.1",
-        port=8000,
-        reload=True
-    )
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-from fastapi import Request
-
 app.mount("/assets", StaticFiles(directory="static/assets"), name="assets")
 
+# React fallback (VERY IMPORTANT)
 @app.get("/{full_path:path}")
 async def serve_react(full_path: str):
     return FileResponse("static/index.html")
+
+# -------------------------
+# Local Run (not used in Docker)
+# -------------------------
+if __name__ == "__main__":
+    uvicorn.run("app.main:app", host="127.0.0.1", port=8000, reload=True)
