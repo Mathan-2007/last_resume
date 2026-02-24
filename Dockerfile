@@ -4,7 +4,7 @@ FROM node:20 AS frontend-build
 WORKDIR /app/frontend
 
 COPY frontend/package*.json ./
-RUN npm install --omit=dev
+RUN npm install
 
 COPY frontend .
 RUN npm run build
