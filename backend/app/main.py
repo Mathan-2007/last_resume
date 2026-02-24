@@ -44,7 +44,16 @@ app.include_router(ai_router, tags=["AI"])
 # -------------------------
 # Static React Build
 # -------------------------
-app.mount("/assets", StaticFiles(directory="static/assets"), name="assets")
+from fastapi.responses import Response
+from starlette.staticfiles import StaticFiles
+
+class CacheStaticFiles(StaticFiles):
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        return response
+
+app.mount("/assets", CacheStaticFiles(directory="static/assets"), name="assets")
 
 # React fallback (VERY IMPORTANT)
 @app.get("/{full_path:path}")
