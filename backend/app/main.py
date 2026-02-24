@@ -69,5 +69,11 @@ if __name__ == "__main__":
         reload=True
     )
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from fastapi import Request
 
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
+app.mount("/assets", StaticFiles(directory="static/assets"), name="assets")
+
+@app.get("/{full_path:path}")
+async def serve_react(full_path: str):
+    return FileResponse("static/index.html")
