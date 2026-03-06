@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactMarkdown from "react-markdown";
 import { useNavigate } from "react-router-dom";
 import { Upload, Target, Briefcase, MessageSquare, CheckCircle, AlertCircle, Info, TrendingUp, FileText, User, Mail, Phone, Code, LogOut } from 'lucide-react';
 
@@ -825,7 +826,9 @@ export default function UserDashboard() {
               ) : (
                 chatMessages.map((msg, idx) => (
                   <div key={idx} style={S.msgRow(msg.role === 'user')}>
-                    <div style={S.msgBubble(msg.role === 'user')}>{msg.content}</div>
+                    <div style={S.msgBubble(msg.role === 'user')}>
+  <ReactMarkdown>{msg.content}</ReactMarkdown>
+</div>
                   </div>
                 ))
               )}
