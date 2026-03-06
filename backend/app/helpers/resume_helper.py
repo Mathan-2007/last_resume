@@ -217,7 +217,7 @@ def calculate_ats_score(data, text, job_description=None, normalized_languages=N
 # -------------------------
 # Core Resume Processor
 # -------------------------
-async def process_resume_file(upload_file):
+def process_resume_file(upload_file):
     """Handle resume PDF upload + AI parsing + ATS scoring + DB save."""
     try:
         contents = await upload_file.read()
