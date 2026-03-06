@@ -542,7 +542,7 @@ export default function UserDashboard() {
             <div style={S.cardTitle}><FileText size={24} /> Resume Analysis Overview</div>
 
             {/* Upload */}
-            <label htmlFor="resume-upload" style={S.uploadArea}>
+            <div style={S.uploadArea} onClick={() => document.getElementById("resume-upload").click()}>
               <input type="file" accept=".pdf" onChange={handleFileChange} style={{ display: "none" }} id="resume-upload" />
               <div style={S.uploadIconWrap}><Upload size={32} color="#d8b4fe" /></div>
               <div style={S.uploadText}>
@@ -594,9 +594,9 @@ export default function UserDashboard() {
                     {/* Personal Info */}
                     <div style={S.infoPanel}>
                       <div style={S.infoPanelTitle}><User size={20} /> Personal Information</div>
-                      {user.name && <div style={S.infoRow}><User size={16} color="#a78bfa" /><span style={S.infoText}>{resumeData?.data?.name}</span></div>}
-                      {user.email && <div style={S.infoRow}><Mail size={16} color="#a78bfa" /><span style={S.infoText}>{resumeData?.data?.email}</span></div>}
-                      {user.phone && <div style={S.infoRow}><Phone size={16} color="#a78bfa" /><span style={S.infoText}>{resumeData?.data?.phone}</span></div>}
+                      {resumeData?.data?.name && <div style={S.infoRow}><User size={16} color="#a78bfa" /><span style={S.infoText}>{resumeData?.data?.name}</span></div>}
+                      {resumeData?.data?.name && <div style={S.infoRow}><Mail size={16} color="#a78bfa" /><span style={S.infoText}>{resumeData?.data?.email}</span></div>}
+                      {resumeData?.data?.name && <div style={S.infoRow}><Phone size={16} color="#a78bfa" /><span style={S.infoText}>{resumeData?.data?.phone}</span></div>}
                     </div>
 
                     {/* Coding Profiles */}
