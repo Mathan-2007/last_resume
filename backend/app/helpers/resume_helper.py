@@ -334,7 +334,7 @@ Resume text:
 
         # ---- Save to MongoDB ----
         try:
-            await db.reports.insert_one({
+            db.reports.insert_one({
                 "filename": getattr(upload_file, "filename", "uploaded_resume"),
                 "data": data,
                 "ats_breakdown": ats["ats_breakdown"],
