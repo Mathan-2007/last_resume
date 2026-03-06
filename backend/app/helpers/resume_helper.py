@@ -220,7 +220,7 @@ def calculate_ats_score(data, text, job_description=None, normalized_languages=N
 def process_resume_file(upload_file):
     """Handle resume PDF upload + AI parsing + ATS scoring + DB save."""
     try:
-        contents = await upload_file.read()
+        contents = upload_file.read()
         if not contents:
             return {"error": "Empty file received. Please upload a valid PDF."}
 
