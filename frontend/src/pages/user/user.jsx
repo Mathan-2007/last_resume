@@ -561,7 +561,7 @@ export default function UserDashboard() {
                   <span style={{ color: "#d8b4fe", fontSize: "14px" }}>Analyzing your resume...</span>
                 </div>
               )}
-            </label>
+            </div>
 
             {resumeData ? (
               <>
