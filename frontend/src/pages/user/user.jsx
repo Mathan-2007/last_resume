@@ -601,12 +601,76 @@ export default function UserDashboard() {
                     </div>
 
                     {/* Coding Profiles */}
-                    <div style={S.infoPanel}>
-                      <div style={S.infoPanelTitle}><Code size={20} /> Coding Profiles</div>
-                      {github && <div style={{ fontSize: "14px", marginBottom: "8px" }}><span style={{ color: "#c4b5fd" }}>GitHub: </span><span style={{ color: "#fff" }}>{github.repos || 0} repos, {github.stars || 0} ⭐</span></div>}
-                      {leetcode && <div style={{ fontSize: "14px", marginBottom: "8px" }}><span style={{ color: "#c4b5fd" }}>LeetCode: </span><span style={{ color: "#fff" }}>{leetcode.solved || 0} solved</span></div>}
-                      {codechef && <div style={{ fontSize: "14px" }}><span style={{ color: "#c4b5fd" }}>CodeChef: </span><span style={{ color: "#fff" }}>{codechef.stars || 0}⭐ Stars</span></div>}
-                    </div>
+
+<div style={S.infoPanel}>
+  <div style={S.infoPanelTitle}><Code size={20} /> Coding Profiles</div>
+
+  {/* GitHub */}
+  {resumeData?.data?.github && (
+    <div style={{ fontSize: "14px", marginBottom: "8px" }}>
+      <span style={{ color: "#c4b5fd" }}>GitHub: </span>
+
+      <a
+        href={`https://${resumeData.data.github}`}
+        target="_blank"
+        rel="noreferrer"
+        style={{ color: "#fff", textDecoration: "underline" }}
+      >
+        {resumeData.data.github}
+      </a>
+
+      {github && (
+        <span style={{ marginLeft: "8px", color: "#c4b5fd" }}>
+          ({github.repos || 0} repos, {github.stars || 0} ⭐)
+        </span>
+      )}
+    </div>
+  )}
+
+  {/* LeetCode */}
+  {resumeData?.data?.leetcode && (
+    <div style={{ fontSize: "14px", marginBottom: "8px" }}>
+      <span style={{ color: "#c4b5fd" }}>LeetCode: </span>
+
+      <a
+        href={`https://leetcode.com/${resumeData.data.leetcode}`}
+        target="_blank"
+        rel="noreferrer"
+        style={{ color: "#fff", textDecoration: "underline" }}
+      >
+        {resumeData.data.leetcode}
+      </a>
+
+      {leetcode && (
+        <span style={{ marginLeft: "8px", color: "#c4b5fd" }}>
+          ({leetcode.solved || 0} solved)
+        </span>
+      )}
+    </div>
+  )}
+
+  {/* CodeChef */}
+  {resumeData?.data?.codechef && (
+    <div style={{ fontSize: "14px" }}>
+      <span style={{ color: "#c4b5fd" }}>CodeChef: </span>
+
+      <a
+        href={`https://www.codechef.com/users/${resumeData.data.codechef}`}
+        target="_blank"
+        rel="noreferrer"
+        style={{ color: "#fff", textDecoration: "underline" }}
+      >
+        {resumeData.data.codechef}
+      </a>
+
+      {codechef && (
+        <span style={{ marginLeft: "8px", color: "#c4b5fd" }}>
+          ({codechef.stars || 0}⭐)
+        </span>
+      )}
+    </div>
+  )}
+</div>
 
                     {/* Technical Skills */}
                     {resumeData?.data?.skills?.technical?.length > 0 && (
