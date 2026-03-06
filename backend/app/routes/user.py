@@ -9,7 +9,7 @@ from io import BytesIO
 from bson import ObjectId
 
 from app.routes.auth_routes import db
-from app.routes.resume_routes import process_resume_file
+from app.helpers.resume_helper import process_resume_file
 
 router = APIRouter(prefix="/user", tags=["User Dashboard"])
 
