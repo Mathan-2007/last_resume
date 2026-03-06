@@ -60,7 +60,7 @@ async def upload_resume(email: str = Form(...), file: UploadFile = None):
         # -------------------------
         # Step 1: Process resume
         # -------------------------
-        result = await process_resume_file(file_stream)
+        result = process_resume_file(file_stream)
 
         if "error" in result:
             raise HTTPException(status_code=500, detail=result["error"])
