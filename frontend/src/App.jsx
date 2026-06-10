@@ -7,7 +7,6 @@ import Login from './pages/Login.jsx';
 import Admin from './pages/Admin/Admin.jsx';
 import Admin1 from './pages/Admin/Admin_Resume_Filter.jsx';
 import User from './pages/user/user.jsx';
-import Trainer from './pages/Trainer/Trainer.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 function App() {
@@ -25,15 +24,6 @@ function App() {
         element={
           <ProtectedRoute allowedRoles={["admin"]}>
             <Admin />
-          </ProtectedRoute>
-        }
-      />
-
-      <Route
-        path="/trainer"
-        element={
-          <ProtectedRoute allowedRoles={["trainer"]}>
-            <Trainer />
           </ProtectedRoute>
         }
       />
